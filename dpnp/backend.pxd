@@ -60,6 +60,7 @@ cdef extern from "backend/backend_iface_fptr.hpp" namespace "DPNPFuncName":  # n
         DPNP_FN_DIVIDE
         DPNP_FN_DOT
         DPNP_FN_EIG
+        DPNP_FN_EIGH
         DPNP_FN_EXP
         DPNP_FN_EXP2
         DPNP_FN_EXPM1

@@ -137,6 +137,100 @@ void custom_det_c(void* array1_in, void* result1, size_t* shape, size_t ndim)
 }
 
 template <typename _DataType>
+class custom_eigh_c_kernel;
+
+template <typename _DataType>
+void custom_eigh_c(void* array1_in, void* result_n, void* result_v, size_t* shape, size_t ndim, size_t uplo)
+{
+    _DataType* array_1 = reinterpret_cast<_DataType*>(array1_in);
+    _DataType* result_n1 = reinterpret_cast<_DataType*>(result_n);
+    _DataType* result_v1 = reinterpret_cast<_DataType*>(result_v);
+
+    size_t n = shape[ndim - 1];
+    size_t size_out = 1;
+    if (ndim == 2)
+    {
+        size_out = 0;
+    }
+    else
+    {
+        for (size_t i = 0; i < ndim - 2; i++)
+        {
+            size_out *= shape[i];
+        }
+    }
+
+    for (size_t i = 0; i < size_out; i++)
+    {
+        _DataType matrix[n][n];
+        if (size_out > 1)
+        {
+            _DataType elems[n * n];
+            for (size_t j = i * n * n; j < (i + 1) * n * n; j++)
+            {
+                elems[j - i * n * n] = array_1[j];
+            }
+
+            for (size_t j = 0; j < n; j++)
+            {
+                for (size_t k = 0; k < n; k++)
+                {
+                    matrix[j][k] = elems[j * n + k];
+                }
+            }
+        }
+        else
+        {
+            for (size_t j = 0; j < n; j++)
+            {
+                for (size_t k = 0; k < n; k++)
+                {
+                    matrix[j][k] = array_1[j * n + k];
+                }
+            }
+        }
+
+        for (size_t l = 0; l < n; l++)
+        {
+            if (matrix[l][l] == 0)
+            {
+                for (size_t j = l; j < n; j++)
+                {
+                    if (matrix[j][l] != 0)
+                    {
+                        for (size_t k = l; k < n; k++)
+                        {
+                            _DataType c = matrix[l][k];
+                            matrix[l][k] = -1 * matrix[j][k];
+                            matrix[j][k] = c;
+                        }
+                        break;
+                    }
+                }
+            }
+            for (size_t j = l + 1; j < n; j++)
+            {
+                _DataType q = -(matrix[j][l] / matrix[l][l]);
+                for (size_t k = l + 1; k < n; k++)
+                {
+                    matrix[j][k] += q * matrix[l][k];
+                }
+            }
+        }
+        for (size_t j = 0; j < n; j++)
+        {
+            for (size_t k = 0; k < n; k++)
+            {
+                result_v1[i * n * n + j * n + k] = matrix[j][k];
+            }
+            result_n1[i * n + j] = matrix[j][j];
+        }
+    }
+
+    return;
+}
+
+template <typename _DataType>
 class custom_matrix_rank_c_kernel;
 
 template <typename _DataType>
@@ -177,6 +271,11 @@ void func_map_init_linalg_func(func_map_t& fmap)
     fmap[DPNPFuncName::DPNP_FN_DET][eft_LNG][eft_LNG] = {eft_LNG, (void*)custom_det_c<long>};
     fmap[DPNPFuncName::DPNP_FN_DET][eft_FLT][eft_FLT] = {eft_FLT, (void*)custom_det_c<float>};
     fmap[DPNPFuncName::DPNP_FN_DET][eft_DBL][eft_DBL] = {eft_DBL, (void*)custom_det_c<double>};
+
+    fmap[DPNPFuncName::DPNP_FN_EIGH][eft_INT][eft_INT] = {eft_INT, (void*)custom_det_c<int>};
+    fmap[DPNPFuncName::DPNP_FN_EIGH][eft_LNG][eft_LNG] = {eft_LNG, (void*)custom_det_c<long>};
+    fmap[DPNPFuncName::DPNP_FN_EIGH][eft_FLT][eft_FLT] = {eft_FLT, (void*)custom_det_c<float>};
+    fmap[DPNPFuncName::DPNP_FN_EIGH][eft_DBL][eft_DBL] = {eft_DBL, (void*)custom_det_c<double>};
 
     fmap[DPNPFuncName::DPNP_FN_MATRIX_RANK][eft_INT][eft_INT] = {eft_INT, (void*)custom_matrix_rank_c<int>};
     fmap[DPNPFuncName::DPNP_FN_MATRIX_RANK][eft_LNG][eft_LNG] = {eft_LNG, (void*)custom_matrix_rank_c<long>};

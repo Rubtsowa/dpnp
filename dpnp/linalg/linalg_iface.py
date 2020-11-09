@@ -51,6 +51,7 @@ from dpnp.linalg.linalg import *
 __all__ = [
     "det",
     "eig",
+    "eigh",
     "matrix_power",
     "matrix_rank",
     "multi_dot"
@@ -99,6 +100,50 @@ def eig(x1):
             return dpnp_eig(x1)
 
     return call_origin(numpy.linalg.eig, x1)
+
+
+def eigh(input, UPLO='L'):
+    """
+    Return the eigenvalues and eigenvectors of a complex Hermitian
+    (conjugate symmetric) or a real symmetric matrix.
+
+    Returns two objects, a 1-D array containing the eigenvalues of `input`, and
+    a 2-D square array or matrix (depending on the input type) of the
+    corresponding eigenvectors (in columns).
+
+    Parameters
+    ----------
+    input : (..., M, M) array
+        Hermitian or real symmetric matrices whose eigenvalues and
+        eigenvectors are to be computed.
+
+    UPLO : {'L', 'U'}, optional
+        Specifies whether the calculation is done with the lower triangular
+        part of `input` ('L', default) or the upper triangular part ('U').
+        Irrespective of this value only the real parts of the diagonal will
+        be considered in the computation to preserve the notion of a Hermitian
+        matrix. It therefore follows that the imaginary part of the diagonal
+        will always be treated as zero.
+
+    Returns
+    -------
+    w : (..., M) ndarray
+        The eigenvalues in ascending order, each repeated according to
+        its multiplicity.
+
+    v : {(..., M, M) ndarray, (..., M, M) matrix}
+        The column ``v[:, i]`` is the normalized eigenvector corresponding
+        to the eigenvalue ``w[i]``.  Will return a matrix object if `a` is
+        a matrix object.
+    """
+    is_x1_dparray = isinstance(input, dparray)
+
+    if (not use_origin_backend(input) and is_x1_dparray) and input.ndim > 1 and \
+            input.shape[-1] == input.shape[-2] and UPLO in ['L', 'U']:
+
+            return dpnp_eigh(input, UPLO)
+
+    return call_origin(numpy.linalg.eigh, input, UPLO)
 
 
 def matrix_power(input, count):

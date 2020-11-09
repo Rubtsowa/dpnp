@@ -76,6 +76,14 @@ def test_eig_arange(type, size):
     numpy.testing.assert_allclose(dpnp_vec, np_vec, rtol=1e-05, atol=1e-05)
 
 
+def test_eigh():
+    a = numpy.array([[1, 2],[3, 4]])
+    ia = inp.array(a)
+    result = inp.linalg.eigh(ia)
+    expected = numpy.linalg.eigh(a, UPLO='U')
+    numpy.testing.assert_array_equal(expected, result)
+
+
 def test_matrix_rank():
     arrays = [
         [0, 0],

@@ -43,12 +43,16 @@ cimport numpy
 __all__ = [
     "dpnp_det",
     "dpnp_eig",
+    "dpnp_eigh",
     "dpnp_matrix_rank"
 ]
 
 
 # C function pointer to the C library template functions
 ctypedef void(*custom_linalg_1in_1out_func_ptr_t)(void *, void * , size_t * , size_t)
+
+
+ctypedef void(*custom_linalg_1in_with_param_2out_func_ptr_t)(void *, void * , void * , size_t * , size_t, size_t)
 
 
 cpdef dparray dpnp_det(dparray input):
@@ -98,6 +102,37 @@ cpdef tuple dpnp_eig(dparray x1):
     func(x1.get_data(), res_val.get_data(), res_vec.get_data(), size)
 
     return (res_val, res_vec)
+
+
+cpdef tuple dpnp_eigh(dparray input, UPLO='L'):
+    cdef dparray_shape_type input_shape = input.shape
+    cdef long input_size = input.size
+    cdef long numbers_size = 1
+    for i in range(len(input_shape)-1):
+        numbers_size *= input_shape[i]
+
+    cdef dparray_shape_type output_shape_numbers = tuple(list(input_shape)[:-1])
+    cdef dparray_shape_type output_shape_vectors = input.shape
+    if UPLO == 'L':
+        uplo = 1
+    else:
+        uplo = 0
+
+    cdef DPNPFuncType param1_type = dpnp_dtype_to_DPNPFuncType(input.dtype)
+
+    cdef DPNPFuncData kernel_data = get_dpnp_function_ptr(DPNP_FN_EIGH, param1_type, param1_type)
+
+    result_type = dpnp_DPNPFuncType_to_dtype(< size_t > kernel_data.return_type)
+    cdef dparray result_numbers = dparray(numbers_size, dtype=result_type)
+    cdef dparray result_vectors = dparray(input_size, dtype=result_type)
+
+    cdef custom_linalg_1in_with_param_2out_func_ptr_t func = <custom_linalg_1in_with_param_2out_func_ptr_t > kernel_data.ptr
+
+    func(input.get_data(), result_numbers.get_data(), result_vectors.get_data(), < size_t * > input._dparray_shape.data(), input.ndim, uplo)
+
+    dpnp_result_n = result_numbers.reshape(output_shape_numbers)
+    dpnp_result_v = result_vectors.reshape(output_shape_vectors)
+    return (dpnp_result_n, dpnp_result_v)
 
 
 cpdef dparray dpnp_matrix_rank(dparray input):

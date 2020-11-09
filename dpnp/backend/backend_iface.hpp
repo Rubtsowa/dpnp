@@ -194,6 +194,26 @@ INP_DLLEXPORT void dpnp_eig_c(const void* array_in, void* result1, void* result2
 
 /**
  * @ingroup BACKEND_API
+ * @brief Compute the eighenvalues and right eighenvectors of a square array.
+ *
+ * @param [in]  array_in  Input array[size][size]
+ *
+ * @param [out] result1   The eigenvalues, each repeated according to its multiplicity
+ *
+ * @param [out] result2   The normalized (unit “length”) eigenvectors
+ *
+ * @param [in]  shape   Shape of input array.
+ *
+ * @param [in]  ndim    Number of elements in shape.
+ *
+ * @param [in]  uplo    Parameter in function.
+ *
+ */
+template <typename _DataType, typename _ResultType>
+INP_DLLEXPORT void dpnp_eigh_c(const void* array_in, void* result1, void* result2, size_t* shape, size_t ndim, size_t uplo);
+
+/**
+ * @ingroup BACKEND_API
  * @brief math library implementation of argsort function
  *
  * @param [in]  array   Input array with data.
