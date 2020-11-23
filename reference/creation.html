@@ -88,6 +88,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ufunc.html">Universal Functions (ufunc)</a></li>
@@ -101,6 +102,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="manipulation.html">Array Manipulation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="binary.html">Binary Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fft.html">FFT Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="logic.html">Logic Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="math.html">Mathematical Functions</a></li>
@@ -111,6 +113,8 @@
 <li class="toctree-l3"><a class="reference internal" href="statistics.html">Statistical Functions</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="comparison.html">Comparison Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous routines</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dpnp_backend_api.html">C++ backend API Reference</a></li>
@@ -194,7 +198,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/dpnp.empty.html#dpnp.empty" title="dpnp.empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.empty</span></code></a></p></td>
-<td><p>Return a new matrix of given shape and type, without initializing entries.</p></td>
+<td><p>Return a new array of given shape and type, without initializing entries.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/dpnp.empty_like.html#dpnp.empty_like" title="dpnp.empty_like"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.empty_like</span></code></a></p></td>
 <td><p>Return a new array with the same shape and type as a given array.</p></td>
@@ -234,6 +238,15 @@
 <tr class="row-even"><td><p><a class="reference internal" href="generated/dpnp.asarray.html#dpnp.asarray" title="dpnp.asarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.asarray</span></code></a></p></td>
 <td><p>Converts an input object into array.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/dpnp.asanyarray.html#dpnp.asanyarray" title="dpnp.asanyarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.asanyarray</span></code></a></p></td>
+<td><p>Convert the input to an ndarray, but pass ndarray subclasses through.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/dpnp.ascontiguousarray.html#dpnp.ascontiguousarray" title="dpnp.ascontiguousarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.ascontiguousarray</span></code></a></p></td>
+<td><p>Return a contiguous array (ndim &gt;= 1) in memory (C order).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/dpnp.copy.html#dpnp.copy" title="dpnp.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.copy</span></code></a></p></td>
+<td><p>Return an array copy of the given object.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -253,6 +266,9 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/dpnp.logspace.html#dpnp.logspace" title="dpnp.logspace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.logspace</span></code></a></p></td>
 <td><p>Return numbers spaced evenly on a log scale.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/dpnp.geomspace.html#dpnp.geomspace" title="dpnp.geomspace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.geomspace</span></code></a></p></td>
+<td><p>Return numbers spaced evenly on a log scale (a geometric progression).</p></td>
 </tr>
 </tbody>
 </table>

@@ -86,6 +86,7 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dpnp_backend_api.html">C++ backend API Reference</a></li>
 </ul>
@@ -207,28 +208,17 @@
 
 <div class="viewcode-block" id="count_nonzero"><a class="viewcode-back" href="../../reference/generated/dpnp.count_nonzero.html#dpnp.count_nonzero">[docs]</a><span class="k">def</span> <span class="nf">count_nonzero</span><span class="p">(</span><span class="n">in_array1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Counts the number of non-zero values in the array ``a``.</span>
-
-<span class="sd">    The word &quot;non-zero&quot; is in reference to the Python 2.x</span>
-<span class="sd">    built-in method ``__nonzero__()`` (renamed ``__bool__()``</span>
-<span class="sd">    in Python 3.x) of Python objects that tests an object&#39;s</span>
-<span class="sd">    &quot;truthfulness&quot;. For example, any number is considered</span>
-<span class="sd">    truthful if it is nonzero, whereas any string is considered</span>
-<span class="sd">    truthful if it is not the empty string. Thus, this function</span>
-<span class="sd">    (recursively) counts how many elements in ``a`` (and in</span>
-<span class="sd">    sub-arrays thereof) have their ``__nonzero__()`` or ``__bool__()``</span>
-<span class="sd">    method evaluated to ``True``.</span>
+<span class="sd">    Counts the number of non-zero values in the array ``in_array1``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    a : array_like</span>
-<span class="sd">        The array for which to count non-zeros.</span>
+<span class="sd">    in_array1 : array_like</span>
+<span class="sd">        Input data. The array for which to count non-zeros.</span>
 <span class="sd">    axis : int or tuple, optional</span>
 <span class="sd">        Axis or tuple of axes along which to count non-zeros.</span>
-<span class="sd">        Default is None, meaning that non-zeros will be counted</span>
-<span class="sd">        along a flattened version of ``a``.</span>
-
-<span class="sd">        .. versionadded:: 1.12.0</span>
+<span class="sd">    keepdims : bool, optional</span>
+<span class="sd">        If this is set to `True`, the axes that are counted</span>
+<span class="sd">        are left in the result as dimensions with size one. </span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -237,20 +227,22 @@
 <span class="sd">        Otherwise, the total number of non-zero values in the array</span>
 <span class="sd">        is returned.</span>
 
-<span class="sd">    See Also</span>
-<span class="sd">    --------</span>
-<span class="sd">    nonzero : Return the coordinates of all the non-zero values.</span>
+<span class="sd">    Limitations</span>
+<span class="sd">    -----------</span>
+<span class="sd">        Parameter ``in_array1`` is supported as :obj:`dpnp.ndarray`.</span>
+<span class="sd">        Otherwise the function will be executed sequentially on CPU.</span>
+<span class="sd">        Parameter ``axis`` is supported only with default value `None`.</span>
+<span class="sd">        Parameter ``keepdims`` is supported only with default value `False`.</span>
+
+<span class="sd">    .. seealso:: :obj:`numpy.count_nonzero`</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; np.count_nonzero(np.eye(4))</span>
-<span class="sd">    4</span>
-<span class="sd">    &gt;&gt;&gt; np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]])</span>
+<span class="sd">    &gt;&gt;&gt; import dpnp as np</span>
+<span class="sd">    &gt;&gt;&gt; np.count_nonzero(np.array([1, 0, 3, 0, 5])</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; np.count_nonzero(np.array([[1, 0, 3, 0, 5],[0, 9, 0, 7, 0]]))</span>
 <span class="sd">    5</span>
-<span class="sd">    &gt;&gt;&gt; np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]], axis=0)</span>
-<span class="sd">    array([1, 1, 1, 1, 1])</span>
-<span class="sd">    &gt;&gt;&gt; np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]], axis=1)</span>
-<span class="sd">    array([2, 3])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

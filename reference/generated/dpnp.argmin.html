@@ -37,7 +37,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="dpnp.count_nonzero" href="dpnp.count_nonzero.html" />
+    <link rel="next" title="dpnp.nonzero" href="dpnp.nonzero.html" />
     <link rel="prev" title="dpnp.argmax" href="dpnp.argmax.html" /> 
 </head>
 
@@ -88,6 +88,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ufunc.html">Universal Functions (ufunc)</a></li>
@@ -95,6 +96,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../creation.html">Array Creation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manipulation.html">Array Manipulation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../binary.html">Binary Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fft.html">FFT Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../linalg.html">Linear Algebra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../logic.html">Logic Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../math.html">Mathematical Functions</a></li>
@@ -110,6 +112,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../statistics.html">Statistical Functions</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html">Comparison Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous routines</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../dpnp_backend_api.html">C++ backend API Reference</a></li>
@@ -210,13 +214,13 @@ with the dimension along <cite>axis</cite> removed.</p>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray.argmin</span></code>, <a class="reference internal" href="dpnp.argmax.html#dpnp.argmax" title="dpnp.argmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">argmax</span></code></a></p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray.argmin</span></code>, <a class="reference internal" href="dpnp.argmax.html#dpnp.argmax" title="dpnp.argmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.argmax</span></code></a></p>
 <dl class="simple">
-<dt><a class="reference internal" href="dpnp.amin.html#dpnp.amin" title="dpnp.amin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">amin</span></code></a></dt><dd><p>The minimum value along a given axis.</p>
+<dt><a class="reference internal" href="dpnp.amin.html#dpnp.amin" title="dpnp.amin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.amin</span></code></a></dt><dd><p>The minimum value along a given axis.</p>
 </dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">unravel_index</span></code></dt><dd><p>Convert a flat index into an index tuple.</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.unravel_index</span></code></dt><dd><p>Convert a flat index into an index tuple.</p>
 </dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_along_axis</span></code></dt><dd><p>Apply <code class="docutils literal notranslate"><span class="pre">np.expand_dims(index_array,</span> <span class="pre">axis)</span></code> from argmin to an array as if by calling min.</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dpnp.take_along_axis</span></code></dt><dd><p>Apply <code class="docutils literal notranslate"><span class="pre">np.expand_dims(index_array,</span> <span class="pre">axis)</span></code> from argmin to an array as if by calling min.</p>
 </dd>
 </dl>
 </div>
@@ -269,7 +273,7 @@ corresponding to the first occurrence are returned.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dpnp.count_nonzero.html" class="btn btn-neutral float-right" title="dpnp.count_nonzero" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dpnp.nonzero.html" class="btn btn-neutral float-right" title="dpnp.nonzero" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="dpnp.argmax.html" class="btn btn-neutral float-left" title="dpnp.argmax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
