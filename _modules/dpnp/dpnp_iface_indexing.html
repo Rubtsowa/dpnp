@@ -212,48 +212,42 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the indices of the elements that are non-zero.</span>
 
-<span class="sd">    Returns a tuple of arrays, one for each dimension of `a`,</span>
-<span class="sd">    containing the indices of the non-zero elements in that</span>
-<span class="sd">    dimension. The values in `a` are always tested and returned in</span>
-<span class="sd">    row-major, C-style order.</span>
+<span class="sd">    For full documentation refer to :obj:`numpy.nonzero`.</span>
 
-<span class="sd">    To group the indices by element, rather than dimension, use `argwhere`,</span>
-<span class="sd">    which returns a row for each non-zero element.</span>
-
-<span class="sd">    .. note::</span>
-
-<span class="sd">       When called on a zero-d array or scalar, ``nonzero(a)`` is treated</span>
-<span class="sd">       as ``nonzero(atleast1d(a))``.</span>
-
-<span class="sd">       .. deprecated:: 1.17.0</span>
-
-<span class="sd">          Use `atleast1d` explicitly if this behavior is deliberate.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    a : array_like</span>
-<span class="sd">        Input array.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    tuple_of_arrays : tuple</span>
-<span class="sd">        Indices of elements that are non-zero.</span>
+<span class="sd">    Limitations</span>
+<span class="sd">    -----------</span>
+<span class="sd">    Input array is supported as :obj:`dpnp.ndarray`.</span>
+<span class="sd">    Otherwise the function will be executed sequentially on CPU.</span>
+<span class="sd">    Input array data types are limited by supported DPNP :ref:`Data types`.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    flatnonzero :</span>
-<span class="sd">        Return indices that are non-zero in the flattened version of the input</span>
-<span class="sd">        array.</span>
-<span class="sd">    ndarray.nonzero :</span>
-<span class="sd">        Equivalent ndarray method.</span>
-<span class="sd">    count_nonzero :</span>
-<span class="sd">        Counts the number of non-zero elements in the input array.</span>
+<span class="sd">    :obj:`dpnp.flatnonzero` : Return indices that are non-zero in</span>
+<span class="sd">                              the flattened version of the input array.</span>
+<span class="sd">    :obj:`dpnp.count_nonzero` : Counts the number of non-zero elements</span>
+<span class="sd">                                in the input array.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    While the nonzero values can be obtained with ``a[nonzero(a)]``, it is</span>
 <span class="sd">    recommended to use ``x[x.astype(bool)]`` or ``x[x != 0]`` instead, which</span>
 <span class="sd">    will correctly handle 0-d arrays.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import dpnp as np</span>
+<span class="sd">    &gt;&gt;&gt; x = np.array([[3, 0, 0], [0, 4, 0], [5, 6, 0]])</span>
+<span class="sd">    &gt;&gt;&gt; out = np.nonzero(x)</span>
+<span class="sd">    &gt;&gt;&gt; for arr in out:</span>
+<span class="sd">    &gt;&gt;&gt;     [i for i in arr]</span>
+<span class="sd">    [0, 1, 2, 2]</span>
+<span class="sd">    [0, 1, 0, 1]</span>
+
+<span class="sd">    &gt;&gt;&gt; x2 = np.array([3, 0, 0, 0, 4, 0, 5, 6, 0])</span>
+<span class="sd">    &gt;&gt;&gt; out2 = np.nonzero(x2)</span>
+<span class="sd">    &gt;&gt;&gt; for arr in out2:</span>
+<span class="sd">    &gt;&gt;&gt;     [i for i in arr]</span>
+<span class="sd">    [0, 4, 6, 7]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
